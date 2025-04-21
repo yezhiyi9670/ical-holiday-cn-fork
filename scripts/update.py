@@ -64,7 +64,7 @@ def update_data(year: int) -> Iterator[str]:
     yield ics_filename
 
 
-def update_main_ics(fr_year, to_year):
+def update_main_ics(fr_year, to_year, dst="holiday-cn.ics"):
     all_days = []
     for year in range(fr_year, to_year + 1):
         filename = workspace_path(f"{year}.json")
@@ -74,7 +74,7 @@ def update_main_ics(fr_year, to_year):
             data = json.loads(inf.read())
             all_days.extend(data.get("days"))
 
-    filename = workspace_path("holiday-cn.ics")
+    filename = workspace_path(dst)
     generate_ics(
         all_days,
         filename,
